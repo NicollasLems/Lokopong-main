@@ -4,11 +4,11 @@ const quadro = canvas.getContext('2d')
 
 quadro.fillStyle = '#ffffff'
 let player1 ={
-    px:80,
-    py:260,
-    tamanho:30,
-    largura:200,
-    dir:0,
+    px:80, //posição do eixo x
+    py:260, //posição do eixo y
+    tamanho:30, // altura do jogador no eixo X
+    largura:200, // largura do jogador no eixo y
+    dir:0, 
     largura:200
 }
 let player2 ={
@@ -20,8 +20,8 @@ let player2 ={
 let bolinha ={
     px:625,
     py:345,
-    tamanho:30,
-    largura:30,
+    tamanho:30, // largura da bolinha no eixo x
+    largura:30, // altura da bolinha no eixo y
     dir:8,
 }
  
@@ -51,6 +51,12 @@ document.addEventListener('keyup', function (e){
 })
 
 function moverPlayer1(){
+    if(player1.py < 0){
+        player1.py = 0
+    }
+    else if(player1.py > 520){
+        player1.py = 520
+    }
     player1.py += player1.dir
 }
 
@@ -59,7 +65,7 @@ bolinha.px += bolinha.dir
      if(bolinha.px > 1168){
         bolinha.dir *= -1
     }
-    else if(bolinha.px < 80){
+    else if(bolinha.py + bolinha.largura >= player1.py && bolinha.py <= player1.py + player1.largura && bolinha.px <= player1.px + player1.tamanho){
         bolinha.dir *= -1
     }
 } 
@@ -79,5 +85,3 @@ function main(){
 }
 
 setInterval(main, 10)
-
-
