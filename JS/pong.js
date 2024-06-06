@@ -16,17 +16,15 @@ let player2 ={
     py:260,
     tamanho:30,
     largura:200,
-<<<<<<< HEAD
     dir:0
-=======
->>>>>>> 8e497154c703cd4c0fb9890ae89ceb633a04096f
 }
 let bolinha ={
     px:625,
     py:345,
     tamanho:30, // largura da bolinha no eixo x
     largura:30, // altura da bolinha no eixo y
-    dir:8,
+    dirX:8,
+    dirY:2,
 }
  
 quadro.font = '30px arial'
@@ -54,7 +52,6 @@ document.addEventListener('keyup', function (e){
     }      
 })
 
-<<<<<<< HEAD
 document.addEventListener('keydown', function (e){
     if(e.keyCode === 38){
         player2.dir = - 8
@@ -73,8 +70,6 @@ document.addEventListener('keyup', function (e){
     }      
 })
 
-=======
->>>>>>> 8e497154c703cd4c0fb9890ae89ceb633a04096f
 function moverPlayer1(){
     if(player1.py < 0){
         player1.py = 0
@@ -85,7 +80,6 @@ function moverPlayer1(){
     player1.py += player1.dir
 }
 
-<<<<<<< HEAD
 function moverPlayer2(){
     if(player2.py < 0){
         player2.py = 0
@@ -98,7 +92,8 @@ function moverPlayer2(){
 }
 
 function moverBolinha(){
-    bolinha.px += bolinha.dir
+    bolinha.px += bolinha.dirX
+    bolinha.py += bolinha.dirY
 } 
 
 function colisaoBolinha(){
@@ -124,7 +119,6 @@ function pontos(){
         pts2++
     }
 }
-=======
 function moverBolinha(){
 bolinha.px += bolinha.dir
      if(bolinha.px > 1168){
@@ -134,7 +128,6 @@ bolinha.px += bolinha.dir
         bolinha.dir *= -1
     }
 } 
->>>>>>> 8e497154c703cd4c0fb9890ae89ceb633a04096f
 
 function draw(){
     quadro.fillRect(player1.px, player1.py, player1.tamanho, player1.largura)
@@ -148,12 +141,9 @@ function main(){
     draw() //Redesenhar
     moverBolinha()
     moverPlayer1()
-<<<<<<< HEAD
     moverPlayer2()
     colisaoBolinha()
     pontos()
-=======
->>>>>>> 8e497154c703cd4c0fb9890ae89ceb633a04096f
 }
 
 setInterval(main, 10)
