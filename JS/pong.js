@@ -23,7 +23,7 @@ let bolinha ={
     py:345,
     tamanho:30, // largura da bolinha no eixo x
     largura:30, // altura da bolinha no eixo y
-    dirX:8,
+    dir:8,
     dirY:2,
 }
  
@@ -92,15 +92,15 @@ function moverPlayer2(){
 }
 
 function moverBolinha(){
-    bolinha.px += bolinha.dirX
+    bolinha.px += bolinha.dir
     bolinha.py += bolinha.dirY
 } 
 
 function colisaoBolinha(){
-         if(bolinha.py + bolinha.largura >= player2.py && bolinha.py <= player2.py + player2.largura && bolinha.px >= player2.px - player2.tamanho){
+         if(bolinha.py + bolinha.largura >= player2.py && bolinha.py <= player2.py + player2.largura && bolinha.px <= player2.px - player2.tamanho && bolinha.px + bolinha.tamanho >= player2.px){
             bolinha.dir *= -1
         }
-        else if(bolinha.py + bolinha.largura >= player1.py && bolinha.py <= player1.py + player1.largura && bolinha.px <= player1.px + player1.tamanho){
+        else if(bolinha.py + bolinha.largura >= player1.py && bolinha.py <= player1.py + player1.largura && bolinha.px <= player1.px - player1.tamanho && bolinha.px + bolinha.tamanho >= player1.px){
             bolinha.dir *= -1
         }
 } 
