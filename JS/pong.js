@@ -33,6 +33,8 @@ let pts2 = 0
 let score1 = quadro.fillText('Score 1: ' + pts1, 200, 50)
 let score2 = quadro.fillText('Score 2: ' + pts2, 975, 50)
 
+let jogar = true
+
 
 document.addEventListener('keydown', function (e){
     if(e.keyCode === 87){
@@ -94,13 +96,22 @@ function moverPlayer2(){
 function moverBolinha(){
     bolinha.px += bolinha.dir
     bolinha.py += bolinha.dirY
+
+    if(bolinha.py < 0){
+        bolinha.dirY *= -1
+    }
+    else if(bolinha.py > 690){
+        bolinha.dirY *= -1
+    }
 } 
 
 function colisaoBolinha(){
-         if(bolinha.py + bolinha.largura >= player2.py && bolinha.py <= player2.py + player2.largura && bolinha.px <= player2.px - player2.tamanho && bolinha.px + bolinha.tamanho >= player2.px){
+         if(bolinha.py + bolinha.largura >= player2.py && bolinha.py <= player2.py + player2.largura 
+            && bolinha.px <= player2.px + player2.tamanho && bolinha.px >= player2.px - player2.tamanho){
             bolinha.dir *= -1
         }
-        else if(bolinha.py + bolinha.largura >= player1.py && bolinha.py <= player1.py + player1.largura && bolinha.px <= player1.px - player1.tamanho && bolinha.px + bolinha.tamanho >= player1.px){
+        else if(bolinha.py + bolinha.largura >= player1.py && bolinha.py <= player1.py + player1.largura 
+            && bolinha.px <= player1.px + player1.tamanho && bolinha.px >= player1.px - player1.tamanho){
             bolinha.dir *= -1
         }
 } 
@@ -121,13 +132,21 @@ function pontos(){
 }
 function moverBolinha(){
 bolinha.px += bolinha.dir
-     if(bolinha.px > 1168){
-        bolinha.dir *= -1
+bolinha.py += bolinha.dirY
+
+     if(bolinha.py < 0){
+        bolinha.dirY *= -1
     }
-    else if(bolinha.py + bolinha.largura >= player1.py && bolinha.py <= player1.py + player1.largura && bolinha.px <= player1.px + player1.tamanho){
-        bolinha.dir *= -1
+    else if(bolinha.py > 690){
+        bolinha.dirY *= -1
     }
 } 
+
+function fimJogo(){
+    if(pts1 > 2 || pts2 > 2){
+        jogar = false
+    }
+}
 
 function draw(){
     quadro.fillRect(player1.px, player1.py, player1.tamanho, player1.largura)
@@ -136,7 +155,15 @@ function draw(){
     quadro.fillText(`Pontos1 : ${pts1}`, 280,50)
     quadro.fillText(`Pontos2 : ${pts2}`, 800,50)
 }
+
+function telaVencedor(){
+    quadro.clearRect(0,0,1280,720)
+    quadro.font = '60px arial'
+    quadro.fillText(`score 1: ${pts1}`, 200,345)
+    quadro.fillText(`score 2: ${pts2}`, 800,345)
+}
 function main(){
+    if(jogar){
     quadro.clearRect(0, 0, 1280, 720) //Limpar todo o objeto "canvas"
     draw() //Redesenhar
     moverBolinha()
@@ -144,6 +171,11 @@ function main(){
     moverPlayer2()
     colisaoBolinha()
     pontos()
+    fimJogo()
+    }
+    else{
+        telaVencedor()
+    }
 }
 
 setInterval(main, 10)
