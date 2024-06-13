@@ -1,6 +1,7 @@
 //const canvas = document.querySelector ('#canvas')
 const canvas = document.getElementById ('canvas')
 const quadro = canvas.getContext('2d')
+const audio = new Audio('assets/pew.mp3')
 
 quadro.fillStyle = '#ffffff'
 let player1 ={
@@ -53,7 +54,7 @@ document.addEventListener('keyup', function (e){
         player1.dir = 0
     }      
 })
-
++
 document.addEventListener('keydown', function (e){
     if(e.keyCode === 38){
         player2.dir = - 8
@@ -109,10 +110,12 @@ function colisaoBolinha(){
          if(bolinha.py + bolinha.largura >= player2.py && bolinha.py <= player2.py + player2.largura 
             && bolinha.px <= player2.px + player2.tamanho && bolinha.px >= player2.px - player2.tamanho){
             bolinha.dir *= -1
+            audio.play()
         }
         else if(bolinha.py + bolinha.largura >= player1.py && bolinha.py <= player1.py + player1.largura 
             && bolinha.px <= player1.px + player1.tamanho && bolinha.px >= player1.px - player1.tamanho){
             bolinha.dir *= -1
+            audio.play()
         }
 } 
 
